@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+	<comment>
+		代码生成器配置文件:
+		1.会为所有的property生成property_dir属性,如pkg=com.company => pkg_dir=com/company
+		2.可以引用环境变量: ${env.JAVA_HOME} or System.properties:
+		${user.home},property之间也可以相互引用
+	</comment>
+	<!-- 包路径 -->
+	<entry key="basepackage">cn.bidlink.purchase.dal</entry>
+	
+	<!-- 继承包路径 -->
+	<!-- 
+	<entry key="parentPackage">cn.bidlink.hades.model</entry> 
+	<entry key="parentClassName">HadesModel</entry> 
+	-->
+	
+	<!-- service包路径 -->
+	<entry key="serviceBasePackage">cn.bidlink.purchase.dal.service</entry>
+	<entry key="serviceImplBasePackage">cn.bidlink.purchase.dal.service.impl</entry>
+	
+	<!-- dao包路径 -->
+	<entry key="daoBasePackage">cn.bidlink.purchase.dal.dao</entry>
+	<entry key="daoImplBasePackage">cn.bidlink.purchase.dal.dao.impl</entry>
+
+	<!-- 注释信息 -->
+	<entry key="authorName">renkai</entry>
+	<entry key="authorEmail">renkai@ebnew.com</entry>
+	<entry key="date">2017-11-21</entry>
+
+	<!-- jsp namespace: web/${namespace}/${className}/list.jsp -->
+	<entry key="namespace">pages</entry>
+	<!-- 输出地址 -->
+	<entry key="outRoot">D:\generator-output\syncproject</entry>
+	<!-- 如果目录已存在是否覆盖原有的,default=false -->
+	<entry key="override">true</entry>
+
+	<!-- 需要移除的表名前缀,使用逗号进行分隔多个前缀,示例值: t_,v_ -->
+	<entry key="tableRemovePrefixes"></entry>
+	<!-- commonDao批量提交的数据,default=100 -->
+	<entry key="batchSubmit">100</entry>
+
+	<!-- oracle需要指定jdbc.schema,并且可能要大写,其它数据库忽略此项配置 -->
+	<entry key="jdbc.schema"></entry>
+	<entry key="jdbc.catalog"></entry>
+	<!-- Mysql -->
+	<entry key="jdbc.username">root</entry>
+	<entry key="jdbc.password">root</entry>
+	<entry key="jdbc.url">jdbc:mysql://192.168.10.69:3306/yuecai?useUnicode=true&amp;characterEncoding=UTF-8</entry>
+	<entry key="jdbc.driver">com.mysql.jdbc.Driver</entry>
+
+
+
+	<!-- 数据库类型至java类型映射 -->
+	<entry key="java_typemapping.java.sql.Timestamp">java.util.Date</entry>
+	<entry key="java_typemapping.java.sql.Date">java.util.Date</entry>
+	<entry key="java_typemapping.java.sql.Time">java.util.Date</entry>
+	<entry key="java_typemapping.java.lang.Byte">java.lang.Integer</entry>
+	<entry key="java_typemapping.java.lang.Short">java.lang.Integer</entry>
+	<entry key="java_typemapping.java.math.BigDecimal">java.math.BigDecimal</entry>
+	<entry key="java_typemapping.java.sql.Clob">java.lang.String</entry>
+	<entry key="java_typemapping.java.sql.Blob">java.lang.String</entry>
+
+</properties>

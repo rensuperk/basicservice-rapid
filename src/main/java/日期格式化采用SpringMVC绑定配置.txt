@@ -1,0 +1,9 @@
+ 表列注释：
+ 在表的对应列注释内添加："[type=1&fmt=yyyy-MM-dd]"
+	 1 所有字符采用英文字符
+	 2 type=1是固定的表示该列对应的Bean属性采用SpringMVC日期格式化绑定机制,为了扩充其它所需而已，没什么特别含义
+	 3 表中该列的类型使用DATETIME
+	 4 生成的Model在对应的的字段上添加Spring格式化注解"@DateTimeFormat",并自动引入所需的类
+待处理bug:
+	1 mysql int 1 类型自动，生成的update语句没有更新对应字段
+	

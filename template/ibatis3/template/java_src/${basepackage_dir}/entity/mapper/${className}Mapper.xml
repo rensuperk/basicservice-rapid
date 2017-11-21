@@ -1,0 +1,149 @@
+<#include "/macro.include"/>
+<#assign className = table.className>
+<#assign classNameFirstLower = table.classNameFirstLower>   
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<#macro mapperEl value>${r"#{"}${value}}</#macro>
+<#macro namespace>${className}.</#macro>
+<!-- 该文件自动生成,请谨慎修改.不使用namespace的话sql搜索定位会比较方便 -->
+<mapper namespace="${basepackage}.dao.${className}Dao">
+
+	<resultMap id="RM_${className}" type="${basepackage}.entity.${className}">
+		<#list table.columns as column>
+		<result property="${column.columnNameLower}" column="${column.sqlName}" />
+		</#list>
+	</resultMap>
+
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="columns">
+	    <![CDATA[
+			<#list table.columns as column>${column.sqlName}<#if column_has_next>,</#if></#list>
+	    ]]>
+	</sql>
+
+	<!-- useGeneratedKeys="true" keyProperty="xxx" for sqlserver and mysql -->
+	<insert id="insert" useGeneratedKeys="true" keyProperty="${table.idColumn.columnNameFirstLower}">
+	    <![CDATA[
+	        INSERT INTO ${table.sqlName} (
+	        <#list table.columns as column>
+	        	${column.sqlName} <#if column_has_next>,</#if>
+	        </#list>
+	        ) VALUES (
+	        <#list table.columns as column>
+	        	<@mapperEl column.columnNameFirstLower/> <#if column_has_next>,</#if>
+	        </#list>        
+	        )
+	    ]]>
+	</insert>
+	<insert id="insertBatch" parameterType="arraylist" useGeneratedKeys="true">
+			INSERT INTO ${table.sqlName} (
+			<#list table.columns as column>
+				${column.sqlName} <#if column_has_next>,</#if>
+			</#list>
+			) VALUES
+				<foreach collection="list" item="obj" open="" close="" separator=",">
+				(
+				<#list table.columns as column>
+					<@mapperEl column.columnNameFirstLower/> <#if column_has_next>,</#if>
+				</#list>
+				)
+			</foreach>
+	</insert>
+	<!-- update -->
+	<sql id="update_sql">
+		<set>
+			<#list table.notPkColumns as column>
+			<#if column.isDateTimeColumn>
+			<if test="${column.columnNameFirstLower} != null">
+				${column.sqlName} = <@mapperEl column.columnNameFirstLower/> <#if column_has_next>,</#if>
+			</if>
+			</#if>
+			<#if column.isNumberColumn>
+			<if test="${column.columnNameFirstLower} != null">
+				${column.sqlName} = <@mapperEl column.columnNameFirstLower/> <#if column_has_next>,</#if>
+			</if>
+			</#if>
+			<#if column.isStringColumn>
+			<if test="${column.columnNameFirstLower} != null and ${column.columnNameFirstLower} != ''">
+				${column.sqlName} = <@mapperEl column.columnNameFirstLower/> <#if column_has_next>,</#if>
+			</if>
+			</#if>
+			</#list>
+		</set>
+	</sql>
+	
+	<update id="update">
+		UPDATE ${table.sqlName}
+		<include refid="update_sql" />
+		WHERE
+		<#list table.compositeIdColumns as column>
+			${column.sqlName} = <@mapperEl column.columnNameLower/> <#if column_has_next> AND
+		</#if>
+		</#list>
+	</update>
+
+	<!-- delete -->
+	<delete id="delete">
+    	<![CDATA[
+        	DELETE FROM ${table.sqlName} 
+        	WHERE
+        	<#list table.compositeIdColumns as column>
+        		${column.sqlName} = <@mapperEl 'id'/> <#if column_has_next> AND </#if>
+			</#list>
+    	]]>
+	</delete>
+
+
+	<!-- selsect -->
+	<select id="getByPK" resultMap="RM_${className}">
+		SELECT
+		<include refid="columns" />
+		FROM ${table.sqlName}
+		WHERE
+		<#list table.compositeIdColumns as column>
+		${column.sqlName} = <@mapperEl 'id'/> <#if column_has_next> AND </#if>
+		and companyId = <@mapperEl 'companyId'/>
+		</#list>
+	</select>
+
+	<sql id="findPage_where">
+		<where>
+			<#list table.columns as column>
+			<#if column.isDateTimeColumn>
+			<if test="${column.columnNameFirstLower}Begin != null">
+				AND ${column.sqlName} >= <@mapperEl column.columnNameFirstLower+"Begin"/>
+			</if>
+			<if test="${column.columnNameFirstLower}End != null">
+				AND ${column.sqlName} &lt;= <@mapperEl column.columnNameFirstLower+"End"/>
+			</if>
+			<#else>
+			<#if column.isNumberColumn>
+			<if test="${column.columnNameFirstLower} != null">
+				AND ${column.sqlName} = <@mapperEl column.columnNameFirstLower/>
+			</if>
+			</#if>
+			<#if column.isStringColumn>
+			<if test="${column.columnNameFirstLower} != null and ${column.columnNameFirstLower} !=''">
+				AND ${column.sqlName} = <@mapperEl column.columnNameFirstLower/>
+			</if>
+			</#if>
+			</#if>
+			</#list>
+		</where>
+	</sql>
+
+	<select id="getFind${className}Count" resultType="long">
+		SELECT COUNT(1)
+		FROM ${table.sqlName}
+		<include refid="findPage_where" />
+	</select>
+
+	<select id="find${className}" resultMap="RM_${className}">
+		SELECT
+		<include refid="columns" />
+		FROM ${table.sqlName}
+		<include refid="findPage_where" />
+	</select>
+
+
+</mapper>
