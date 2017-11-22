@@ -90,6 +90,7 @@
         	<#list table.compositeIdColumns as column>
         		${column.sqlName} = <@mapperEl 'id'/> <#if column_has_next> AND </#if>
 			</#list>
+			and companyId = <@mapperEl 'companyId'/>
     	]]>
 	</delete>
 
@@ -102,8 +103,8 @@
 		WHERE
 		<#list table.compositeIdColumns as column>
 		${column.sqlName} = <@mapperEl 'id'/> <#if column_has_next> AND </#if>
-		and companyId = <@mapperEl 'companyId'/>
 		</#list>
+		and companyId = <@mapperEl 'companyId'/>
 	</select>
 
 	<sql id="findPage_where">
