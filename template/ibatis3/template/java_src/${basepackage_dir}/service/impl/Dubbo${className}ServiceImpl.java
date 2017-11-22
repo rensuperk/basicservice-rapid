@@ -83,6 +83,22 @@ public class Dubbo${className}ServiceImpl implements Dubbo${className}Service {
 
 		return result;
 	}
+	@Override
+	public ServiceResult<Integer> deleteBatch(List<Long> ids, Long companyId){
+		ServiceResult<Integer> result = new ServiceResult<>();
+
+		try{
+			int row = ${classNameLower}Dao.deleteBatch(ids, companyId);
+			result.setResult(row);
+		}catch(Exception e){
+			log.error("调用{}方法 异常", "[Dubbo${className}ServiceImpl.delete]");
+			log.error("方法使用参数：[ids:{}, companyId:{}]", ids, companyId);
+			log.error("异常信息：{}", e);
+			result.setErrMessage("调用delete方法异常，异常信息：" + e.getMessage());
+		}
+
+		return result;
+	}
 
 	@Override
 	public ServiceResult<${className}> findByPK(Long id, Long companyId){

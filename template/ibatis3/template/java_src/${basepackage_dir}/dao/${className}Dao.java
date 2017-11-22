@@ -37,6 +37,13 @@ public interface ${className}Dao {
      * @return 返回删除条目数据库影响数
      */
     Integer delete(@Param("id") Long id, @Param("companyId") Long companyId);
+    /**
+     * 根据IDS删除对应条目
+     * @param ids ids
+     * @param companyId 企业ID
+     * @return 返回删除条目数据库影响数
+     */
+    Integer deleteBatch(@Param("ids") List<Long> ids, @Param("companyId") Long companyId);
 
     /**
      * 根据ID查询对应的条目

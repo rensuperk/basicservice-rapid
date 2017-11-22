@@ -38,6 +38,11 @@ public class Dubbo${className}ServiceTest extends TestBase{
         Long companyId = null;
         print(dubbo${className}Service.delete(id,companyId));
     }
+    public void testDeleteBatch(){
+        List<Long> ids = null;
+        Long companyId = null;
+        print(dubbo${className}Service.deleteBatch(ids,companyId));
+    }
     public void testFindByPK(){
         Long id = null;
         Long companyId = null;

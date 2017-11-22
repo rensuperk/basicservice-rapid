@@ -44,7 +44,7 @@
 				<foreach collection="list" item="obj" open="" close="" separator=",">
 				(
 				<#list table.columns as column>
-					<@mapperEl column.columnNameFirstLower/> <#if column_has_next>,</#if>
+					<@mapperEl "obj."+column.columnNameFirstLower/> <#if column_has_next>,</#if>
 				</#list>
 				)
 			</foreach>
@@ -94,6 +94,14 @@
     	]]>
 	</delete>
 
+
+	<delete id="deleteBatch">
+		DELETE FROM ${table.sqlName} WHERE id IN
+		<foreach item="ids" collection="ids" open="(" separator="," close=")">
+			${r"#{ids}"}
+		</foreach>
+		and company_id = <@mapperEl 'companyId'/>
+	</delete>
 
 	<!-- selsect -->
 	<select id="getByPK" resultMap="RM_${className}">
