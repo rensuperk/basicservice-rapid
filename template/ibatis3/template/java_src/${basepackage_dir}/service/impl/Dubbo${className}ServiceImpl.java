@@ -28,6 +28,11 @@ public class Dubbo${className}ServiceImpl implements Dubbo${className}Service {
 
 	private static Logger log = LoggerFactory.getLogger(Dubbo${className}ServiceImpl.class);
 
+
+	public void set${className}Dao(${className}Dao ${classNameLower}Dao) {
+		this.${classNameLower}Dao = ${classNameLower}Dao;
+	}
+
 	@Override
 	public ServiceResult<Long> save(${className} ${classNameLower}){
 		ServiceResult<Long> result = new ServiceResult<>();

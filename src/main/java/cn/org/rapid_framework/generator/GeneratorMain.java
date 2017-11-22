@@ -24,7 +24,7 @@ public class GeneratorMain {
 		GeneratorProperties.setProperty("date", sdf.format(new Date()));
 
 		// 通过数据库表生成文件,template为模板的根目录
-		String[] tables = { "purchase_project" };
+		String[] tables = { "purchase_supplier_project","purchase_supplier_project_item" };
 
 		for (String tablename : tables) {
 			g.generateByTable(tablename, "template");
