@@ -54,4 +54,10 @@ public class Dubbo${className}ServiceTest extends TestBase{
         ${className} ${classNameLower} = new ${className}();
         print(dubbo${className}Service.findByCondition(${classNameLower}));
     }
+
+    public void testInsertBatch(){
+        List<${className}> ${classNameLower}List = new ArrayList<>();
+
+        print(dubbo${className}Service.insertBatch(${classNameLower}List));
+    }
 }
