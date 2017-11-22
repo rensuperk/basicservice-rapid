@@ -6,6 +6,8 @@ package ${serviceBasePackage}.test;
 import ${basepackage}.entity.${className};
 import ${basepackage}.service.Dubbo${className}Service;
 import cn.bidlink.base.util.PageSet;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * <code>${className}</code>Service接口.
