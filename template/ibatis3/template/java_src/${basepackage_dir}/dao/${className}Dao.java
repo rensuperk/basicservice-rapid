@@ -53,12 +53,6 @@ public interface ${className}Dao {
      */
     ${className} getByPK(@Param("id") Long id, @Param("companyId") Long companyId);
 
-    /**
-     * 根据条件查询对应的条目总数
-     * @param ${classNameLower} 带有查询条件的对象
-     * @return 返回查询的结果总数
-     */
-    Long getFind${className}Count(${className} ${classNameLower});
 
     /**
      * 根据条件查询对应的条目

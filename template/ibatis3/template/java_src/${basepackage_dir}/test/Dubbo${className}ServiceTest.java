@@ -48,10 +48,6 @@ public class Dubbo${className}ServiceTest extends TestBase{
         Long companyId = null;
         print(dubbo${className}Service.findByPK(id,companyId));
     }
-    public void testGetTotalCount(){
-        ${className} ${classNameLower} = new ${className}();
-        print(dubbo${className}Service.getTotalCount(${classNameLower}));
-    }
     public void testFindByConditionPage(){
         ${className} ${classNameLower} = new ${className}();
         PageSet pageSet = new PageSet();

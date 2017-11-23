@@ -126,12 +126,6 @@
 		</where>
 	</sql>
 
-	<select id="getFind${className}Count" resultType="long">
-		SELECT COUNT(1)
-		FROM ${table.sqlName}
-		<include refid="findPage_where" />
-	</select>
-
 	<select id="find${className}" resultMap="RM_${className}">
 		SELECT
 		<include refid="columns" />

@@ -8,6 +8,7 @@ import ${daoBasePackage}.${className}Dao;
 import ${basepackage}.entity.${className};
 import ${serviceBasePackage}.Dubbo${className}Service;
 import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.Page;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.StringUtils;
@@ -118,30 +119,14 @@ public class Dubbo${className}ServiceImpl implements Dubbo${className}Service {
 	}
 
 	@Override
-	public ServiceResult<Long> getTotalCount(${className} ${classNameLower}){
-		ServiceResult<Long> result = new ServiceResult<>();
-
-		try{
-			long count = ${classNameLower}Dao.getFind${className}Count(${classNameLower});
-			result.setResult(count);
-		}catch(Exception e){
-			log.error("调用{}方法 异常", "[Dubbo${className}ServiceImpl.getTotalCount]");
-			log.error("方法使用参数：[${classNameLower}:{}]", ${classNameLower});
-			log.error("异常信息：{}", e);
-			result.setErrMessage("调用getTotalCount方法异常，异常信息：" + e.getMessage());
-		}
-
-		return result;
-	}
-
-	@Override
 	public ServiceResult<List<${className}>> findByCondition(${className} ${classNameLower}, PageSet pageSet){
 		ServiceResult<List<${className}>> result = new ServiceResult<>();
 
 		try{
 			if(pageSet != null){
+				Page<${className}> page = null;
 				if(null != pageSet.getPageNum() && null != pageSet.getPageSize()){
-					PageHelper.startPage(pageSet.getPageNum(), pageSet.getPageSize());
+					page = PageHelper.startPage(pageSet.getPageNum(), pageSet.getPageSize());
 					if(StringUtils.hasLength(pageSet.getSortColumn())){
 						PageHelper.orderBy(pageSet.getSortColumn());
 					}
@@ -150,6 +135,7 @@ public class Dubbo${className}ServiceImpl implements Dubbo${className}Service {
 
 			List<${className}> list = ${classNameLower}Dao.find${className}(${classNameLower});
 			result.setResult(list);
+			result.setTotal(page == null ? null : page.getTotal());
 		}catch(Exception e){
 			log.error("调用{}方法 异常", "[Dubbo${className}ServiceImpl.findByCondition]");
 			log.error("方法使用参数：[${classNameLower}:{}, pageSet:{}]", ${classNameLower}, pageSet);
