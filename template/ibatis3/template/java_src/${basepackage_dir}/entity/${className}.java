@@ -17,12 +17,12 @@ public class ${className} implements java.io.Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	<#list table.columns as column>
-
 	/**
      * @描述:${column.remarks}     
      * @字段:${column.sqlName} ${column.sqlTypeName}(${column.size})  
      */	
 	private ${column.javaType} ${column.columnNameLower};
+
 	<#if column.isDateTimeColumn>
 	
 	/** 非数据库字段，查询时使用 */
@@ -119,14 +119,4 @@ public class ${className} implements java.io.Serializable {
 		return ${fkPojoClassVar};
 	}
 	</#list>
-
-	private String sortColumns;
-
-	public String getSortColumns() {
-		return sortColumns;
-	}
-
-	public void setSortColumns(String sortColumns) {
-		this.sortColumns = sortColumns;
-	}
 </#macro>

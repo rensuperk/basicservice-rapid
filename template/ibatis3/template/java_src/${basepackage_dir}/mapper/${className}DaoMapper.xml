@@ -53,21 +53,9 @@
 	<sql id="update_sql">
 		<set>
 			<#list table.notPkColumns as column>
-			<#if column.isDateTimeColumn>
-			<if test="${column.columnNameFirstLower} != null">
+			<if test="${column.columnNameFirstLower} != null<#if column.isStringColumn> and ${column.columnNameFirstLower} != ''</#if>">
 				${column.sqlName} = <@mapperEl column.columnNameFirstLower/> <#if column_has_next>,</#if>
 			</if>
-			</#if>
-			<#if column.isNumberColumn>
-			<if test="${column.columnNameFirstLower} != null">
-				${column.sqlName} = <@mapperEl column.columnNameFirstLower/> <#if column_has_next>,</#if>
-			</if>
-			</#if>
-			<#if column.isStringColumn>
-			<if test="${column.columnNameFirstLower} != null and ${column.columnNameFirstLower} != ''">
-				${column.sqlName} = <@mapperEl column.columnNameFirstLower/> <#if column_has_next>,</#if>
-			</if>
-			</#if>
 			</#list>
 		</set>
 	</sql>
@@ -125,17 +113,14 @@
 			<if test="${column.columnNameFirstLower}End != null">
 				AND ${column.sqlName} &lt;= <@mapperEl column.columnNameFirstLower+"End"/>
 			</if>
+			<#elseif column.isStringColumn>
+            <if test="${column.columnNameFirstLower} != null and ${column.columnNameFirstLower} !=''">
+				AND ${column.sqlName} = <@mapperEl column.columnNameFirstLower/>
+			</if>
 			<#else>
-			<#if column.isNumberColumn>
 			<if test="${column.columnNameFirstLower} != null">
 				AND ${column.sqlName} = <@mapperEl column.columnNameFirstLower/>
 			</if>
-			</#if>
-			<#if column.isStringColumn>
-			<if test="${column.columnNameFirstLower} != null and ${column.columnNameFirstLower} !=''">
-				AND ${column.sqlName} = <@mapperEl column.columnNameFirstLower/>
-			</if>
-			</#if>
 			</#if>
 			</#list>
 		</where>
