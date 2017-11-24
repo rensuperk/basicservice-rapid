@@ -51,6 +51,12 @@ public interface Dubbo${className}Service {
 	 */
 	ServiceResult<${className}> findByPK(Long id, Long companyId);
 
+	/**
+	 * 根据条件查询对应的条目总数
+	 * @param ${classNameLower} 带有查询条件的对象
+	 * @return 返回查询的结果总数
+	 */
+	ServiceResult<Long> getTotalCount(${className} ${classNameLower});
 
 	/**
 	 * 根据条件查询对应的条目

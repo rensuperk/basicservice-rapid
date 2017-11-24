@@ -119,6 +119,23 @@ public class Dubbo${className}ServiceImpl implements Dubbo${className}Service {
 	}
 
 	@Override
+	public ServiceResult<Long> getTotalCount(${className} ${classNameLower}){
+		ServiceResult<Long> result = new ServiceResult<>();
+
+		try{
+			long count = ${classNameLower}Dao.getFind${className}Count(${classNameLower});
+			result.setResult(count);
+		}catch(Exception e){
+			log.error("调用{}方法 异常", "[Dubbo${className}ServiceImpl.getTotalCount]");
+			log.error("方法使用参数：[${classNameLower}:{}]", ${classNameLower});
+			log.error("异常信息：{}", e);
+			result.setErrMessage("调用getTotalCount方法异常，异常信息：" + e.getMessage());
+		}
+
+		return result;
+	}
+
+	@Override
 	public ServiceResult<List<${className}>> findByCondition(${className} ${classNameLower}, PageSet pageSet){
 		ServiceResult<List<${className}>> result = new ServiceResult<>();
 
