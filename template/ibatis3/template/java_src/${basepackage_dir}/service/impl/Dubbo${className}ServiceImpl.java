@@ -140,8 +140,8 @@ public class Dubbo${className}ServiceImpl implements Dubbo${className}Service {
 		ServiceResult<List<${className}>> result = new ServiceResult<>();
 
 		try{
+			Page<${className}> page = null;
 			if(pageSet != null){
-				Page<${className}> page = null;
 				if(null != pageSet.getPageNum() && null != pageSet.getPageSize()){
 					page = PageHelper.startPage(pageSet.getPageNum(), pageSet.getPageSize());
 					if(StringUtils.hasLength(pageSet.getSortColumn())){
