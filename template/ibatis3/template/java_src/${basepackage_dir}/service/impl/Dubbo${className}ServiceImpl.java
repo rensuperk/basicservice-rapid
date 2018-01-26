@@ -69,15 +69,15 @@ public class Dubbo${className}ServiceImpl implements Dubbo${className}Service {
 	}
 
 	@Override
-	public ServiceResult<Integer> delete(Long id, Long companyId){
+	public ServiceResult<Integer> delete(Long id){
 		ServiceResult<Integer> result = new ServiceResult<>();
 
 		try{
-			int row = ${classNameLower}Dao.delete(id, companyId);
+			int row = ${classNameLower}Dao.delete(id);
 			result.setResult(row);
 		}catch(Exception e){
 			log.error("调用{}方法 异常", "[Dubbo${className}ServiceImpl.delete]");
-			log.error("方法使用参数：[id:{}, companyId:{}]", id, companyId);
+			log.error("方法使用参数：[id:{}]", id);
 			log.error("异常信息：{}", e);
 			result.setErrMessage("调用delete方法异常，异常信息：" + e.getMessage());
 		}
@@ -85,15 +85,15 @@ public class Dubbo${className}ServiceImpl implements Dubbo${className}Service {
 		return result;
 	}
 	@Override
-	public ServiceResult<Integer> deleteBatch(List<Long> ids, Long companyId){
+	public ServiceResult<Integer> deleteBatch(List<Long> ids){
 		ServiceResult<Integer> result = new ServiceResult<>();
 
 		try{
-			int row = ${classNameLower}Dao.deleteBatch(ids, companyId);
+			int row = ${classNameLower}Dao.deleteBatch(ids);
 			result.setResult(row);
 		}catch(Exception e){
 			log.error("调用{}方法 异常", "[Dubbo${className}ServiceImpl.delete]");
-			log.error("方法使用参数：[ids:{}, companyId:{}]", ids, companyId);
+			log.error("方法使用参数：[ids:{}]", ids);
 			log.error("异常信息：{}", e);
 			result.setErrMessage("调用delete方法异常，异常信息：" + e.getMessage());
 		}
@@ -102,15 +102,15 @@ public class Dubbo${className}ServiceImpl implements Dubbo${className}Service {
 	}
 
 	@Override
-	public ServiceResult<${className}> findByPK(Long id, Long companyId){
+	public ServiceResult<${className}> findByPK(Long id){
 		ServiceResult<${className}> result = new ServiceResult<>();
 
 		try{
-			${className} ${classNameLower} = ${classNameLower}Dao.getByPK(id, companyId);
+			${className} ${classNameLower} = ${classNameLower}Dao.getByPK(id);
 			result.setResult(${classNameLower});
 		}catch(Exception e){
 			log.error("调用{}方法 异常", "[Dubbo${className}ServiceImpl.findByPK]");
-			log.error("方法使用参数：[id:{}, companyId:{}]", id, companyId);
+			log.error("方法使用参数：[id:{}]", id);
 			log.error("异常信息：{}", e);
 			result.setErrMessage("调用findByPK方法异常，异常信息：" + e.getMessage());
 		}
@@ -144,11 +144,11 @@ public class Dubbo${className}ServiceImpl implements Dubbo${className}Service {
 			if(pageSet != null){
 				if(null != pageSet.getPageNum() && null != pageSet.getPageSize()){
 					page = PageHelper.startPage(pageSet.getPageNum(), pageSet.getPageSize());
-					if(StringUtils.hasLength(pageSet.getSortColumn())){
-						PageHelper.orderBy(pageSet.getSortColumn());
-					}
 				}
-			}
+				if(StringUtils.hasLength(pageSet.getSortColumn())){
+					PageHelper.orderBy(pageSet.getSortColumn());
+				}
+		    }
 
 			List<${className}> list = ${classNameLower}Dao.find${className}(${classNameLower});
 			result.setResult(list);

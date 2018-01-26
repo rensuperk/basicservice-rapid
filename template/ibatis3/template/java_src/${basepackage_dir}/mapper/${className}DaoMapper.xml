@@ -78,7 +78,6 @@
         	<#list table.compositeIdColumns as column>
         		${column.sqlName} = <@mapperEl 'id'/> <#if column_has_next> AND </#if>
 			</#list>
-			and company_id = <@mapperEl 'companyId'/>
     	]]>
 	</delete>
 
@@ -88,7 +87,6 @@
 		<foreach item="ids" collection="ids" open="(" separator="," close=")">
 			${r"#{ids}"}
 		</foreach>
-		and company_id = <@mapperEl 'companyId'/>
 	</delete>
 
 	<!-- selsect -->
@@ -100,7 +98,6 @@
 		<#list table.compositeIdColumns as column>
 		${column.sqlName} = <@mapperEl 'id'/> <#if column_has_next> AND </#if>
 		</#list>
-		and company_id = <@mapperEl 'companyId'/>
 	</select>
 
 	<sql id="findPage_where">

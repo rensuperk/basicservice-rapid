@@ -8,7 +8,7 @@
 		${user.home},property之间也可以相互引用
 	</comment>
 	<!-- 包路径 -->
-	<entry key="basepackage">cn.bidlink.purchase.dal</entry>
+	<entry key="basepackage">cn.bidlink.procurement.bidding.dal</entry>
 	
 	<!-- 继承包路径 -->
 	<!-- 
@@ -17,22 +17,22 @@
 	-->
 	
 	<!-- service包路径 -->
-	<entry key="serviceBasePackage">cn.bidlink.purchase.dal.service</entry>
-	<entry key="serviceImplBasePackage">cn.bidlink.purchase.dal.service.impl</entry>
+	<entry key="serviceBasePackage">cn.bidlink.procurement.bidding.dal.service</entry>
+	<entry key="serviceImplBasePackage">cn.bidlink.procurement.bidding.dal.service.impl</entry>
 	
 	<!-- dao包路径 -->
-	<entry key="daoBasePackage">cn.bidlink.purchase.dal.dao</entry>
-	<entry key="daoImplBasePackage">cn.bidlink.purchase.dal.dao.impl</entry>
+	<entry key="daoBasePackage">cn.bidlink.procurement.bidding.dal.dao</entry>
+	<entry key="daoImplBasePackage">cn.bidlink.procurement.bidding.dal.dao.impl</entry>
 
 	<!-- 注释信息 -->
 	<entry key="authorName">renkai</entry>
 	<entry key="authorEmail">renkai@ebnew.com</entry>
-	<entry key="date">2017-11-21</entry>
+	<entry key="date">2018-1-22</entry>
 
 	<!-- jsp namespace: web/${namespace}/${className}/list.jsp -->
 	<entry key="namespace">pages</entry>
 	<!-- 输出地址 -->
-	<entry key="outRoot">D:\generator-output\syncproject</entry>
+	<entry key="outRoot">e:\generator-output</entry>
 	<!-- 如果目录已存在是否覆盖原有的,default=false -->
 	<entry key="override">true</entry>
 
