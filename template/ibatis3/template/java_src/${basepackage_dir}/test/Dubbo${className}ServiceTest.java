@@ -35,18 +35,15 @@ public class Dubbo${className}ServiceTest extends TestBase{
     }
     public void testDelete(){
         Long id = null;
-        Long companyId = null;
-        print(dubbo${className}Service.delete(id,companyId));
+        print(dubbo${className}Service.delete(id));
     }
     public void testDeleteBatch(){
         List<Long> ids = null;
-        Long companyId = null;
-        print(dubbo${className}Service.deleteBatch(ids,companyId));
+        print(dubbo${className}Service.deleteBatch(ids));
     }
     public void testFindByPK(){
         Long id = null;
-        Long companyId = null;
-        print(dubbo${className}Service.findByPK(id,companyId));
+        print(dubbo${className}Service.findByPK(id));
     }
     public void testGetTotalCount(){
         ${className} ${classNameLower} = new ${className}();
@@ -64,7 +61,6 @@ public class Dubbo${className}ServiceTest extends TestBase{
 
     public void testInsertBatch(){
         List<${className}> ${classNameLower}List = new ArrayList<>();
-
         print(dubbo${className}Service.insertBatch(${classNameLower}List));
     }
 }
