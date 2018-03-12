@@ -32,21 +32,18 @@ public interface Dubbo${className}Service {
 	/**
 	 * 根据ID删除对应条目
 	 * @param id id
-	 * @param companyId 企业ID
 	 * @return 返回删除条目数据库影响数
 	 */
 	ServiceResult<Integer> delete(Long id);
 	/**
 	 * 根据IDS删除对应条目
 	 * @param ids ids
-	 * @param companyId 企业ID
 	 * @return 返回删除条目数据库影响数
 	 */
 	ServiceResult<Integer> deleteBatch(List<Long> ids);
 	/**
 	 * 根据ID查询对应的条目
 	 * @param id id
-	 * @param companyId 企业ID
 	 * @return 返回查询的结果
 	 */
 	ServiceResult<${className}> findByPK(Long id);
